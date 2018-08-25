@@ -13,7 +13,7 @@
         <div v-for="(item,index) in node.items" :key="index" :title="item.name" :name="item.name" :id="item.id" class="subproject-item hover" :class="item.id == activeId ? 'active':''">
           <input type="checkbox" v-if="checkable" v-model=item.checked @change="changeChildNodeChecked">
           <label :for="index" :title="item.name" style="display: inline-block;height: 25px;line-height: 25px;">
-            <img src="static/images/file.png">
+            <img src="/static/images/file.png">
             <span :name="item.name">{{item.name}}</span>
           </label>
         </div>
