@@ -175,6 +175,6 @@ export default {
 .active {
   background-color: #fff;
   color: rgb(40,92,149);
-  font-weight: 600; 
+  font-weight: 600;
 }
 </style>

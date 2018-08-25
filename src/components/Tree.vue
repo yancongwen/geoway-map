@@ -4,9 +4,9 @@
     <div class="project" v-for="(node,index) in nodeList" :key="index">
       <input type="checkbox" v-if="checkable" v-model=node.checked @change="changeParentNodeChecked">
       <label @click="checkSublayer(node)" :title="node.name" style="display: inline-block;height: 25px;line-height: 25px;">
-        <img src="static/images/folder.png" v-if="node.type==='folder'&&node.collapsed==true">
-        <img src="static/images/opened_folder.png" v-if="node.type==='folder'&&node.collapsed==false">
-        <img src="static/images/file.png" v-if="node.type==='file'">
+        <img src="/static/images/folder.png" v-if="node.type==='folder'&&node.collapsed==true">
+        <img src="/static/images/opened_folder.png" v-if="node.type==='folder'&&node.collapsed==false">
+        <img src="/static/images/file.png" v-if="node.type==='file'">
         <span>{{node.name}}</span>
       </label>
       <div v-if="node.items!==undefined" class="subproject" v-show="node.collapsed==false">
