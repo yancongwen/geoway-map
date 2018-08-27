@@ -1,11 +1,21 @@
 <template>
   <div class="map-wrap">
     <div class="toolbar">
-      <div class="btn" @click="clearDraw()">清除交互</div>
-      <div class="btn" @click="clearLayer()">清除图层</div>
-      <div class="btn" @click="addInteraction('Polygon')" :class="{active: actived === 'Polygon'}">面标绘</div>
-      <div class="btn" @click="addInteraction('LineString')" :class="{active: actived === 'LineString'}">线标绘</div>
-      <div class="btn" @click="addInteraction('Point')" :class="{active: actived === 'Point'}">点标绘</div>
+      <div class="btn clearfix" @click="clearDraw()">
+        <span class="icon clear-draw"></span><span class="text">清除交互</span>
+      </div>
+      <div class="btn clearfix" @click="clearLayer()">
+        <span class="icon clear-layer"></span><span class="text">清除图层</span>
+      </div>
+      <div class="btn clearfix" @click="addInteraction('Polygon')" :class="{active: actived === 'Polygon'}">
+        <span class="icon polygon"></span><span class="text">面标绘</span>
+      </div>
+      <div class="btn clearfix" @click="addInteraction('LineString')" :class="{active: actived === 'LineString'}">
+        <span class="icon line"></span><span class="text">线标绘</span>
+      </div>
+      <div class="btn clearfix" @click="addInteraction('Point')" :class="{active: actived === 'Point'}">
+        <span class="icon point"></span><span class="text">点标绘</span>
+      </div>
     </div>
     <div id="map"></div>
   </div>
@@ -14,13 +24,13 @@
 <script>
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
+import VectorLayer from 'ol/layer/Vector'
 import TileImage from 'ol/source/TileImage'
+import VectorSource from 'ol/source/Vector'
 import TileGrid from 'ol/tilegrid/TileGrid'
+import Draw from 'ol/interaction/Draw'
 import {getWidth, getTopLeft} from 'ol/extent.js'
 import {get as getProjection} from 'ol/proj.js'
-import {Vector as VectorSource} from 'ol/source.js'
-import {Vector as VectorLayer} from 'ol/layer.js'
-import Draw from 'ol/interaction/Draw.js'
 
 export default {
   data () {
@@ -122,7 +132,6 @@ export default {
       this.map.addInteraction(this.draw)
     },
     clearLayer () {
-      this.actived = ''
       this.drawSource.clear()
     },
     clearDraw () {
@@ -160,21 +169,46 @@ export default {
   width: 100%;
 }
 .btn {
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
   float: right;
   font-size: 12px;
   margin: 0 5px;
-  padding: 0 5px;
   cursor: pointer;
-  border: 1px solid #cccccc;
-  border-radius: 2px;
-  background-color: #eee;
+  border-radius: 4px;
+}
+.btn:hover {
+  font-weight: bold;
+}
+.icon {
+  display: inline-block;
+  width: 18px;
+  height: 28px;
+  background: #eeeeee url(../../static/images/icons.png);
+  vertical-align: middle;
+}
+.point {
+  background-position: -76px -127px;
+}
+.line {
+  background-position: -149px -127px;
+}
+.polygon {
+  background-position: -166px -127px;
+}
+.clear-draw {
+  background-position: -278px -127px;
+}
+.clear-layer {
+  background-position: -110px -127px;
 }
 .active {
-  background-color: #fff;
-  color: rgb(40,92,149);
-  font-weight: 600;
+  color: rgb(18, 88, 175);
+  font-size: 14px;
+  font-weight: 700;
+}
+.clearfix::after {
+  content: "\20";
+  display: block;
+  height: 0;
+  clear: both;
 }
 </style>
