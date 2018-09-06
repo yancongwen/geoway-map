@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { Map, View } from 'ol'
+import {Map, View} from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import TileImage from 'ol/source/TileImage'
@@ -40,6 +40,7 @@ export default {
   },
   props: ['layerIds'],
   methods: {
+    // 初始化地图
     initMap () {
       let layers = this.getLayers()
       this.map = new Map({
@@ -61,6 +62,8 @@ export default {
       })
       this.map.addLayer(this.drawLayer)
     },
+
+    // 获取天地图图层数组
     getLayers () {
       let layers = []
       let ids = ['vec_c', 'eva_c', 'cva_c']
@@ -70,6 +73,8 @@ export default {
       })
       return layers
     },
+
+    // 初始化天地图图层
     getTdtlayer (lyr) {
       var url = 'http://t0.tianditu.com/DataServer?T=' + lyr + '&X={x}&Y={y}&L={z}'
       var projection = getProjection('EPSG:4326')
@@ -109,6 +114,8 @@ export default {
       layer.id = lyr
       return layer
     },
+
+    // 刷新地图图层的显示或隐藏
     refreshMap () {
       let layerIds = this.layerIds
       this.map.getLayers().forEach(layer => {
@@ -121,6 +128,8 @@ export default {
         }
       })
     },
+
+    // 添加绘制交互
     addInteraction (type) {
       this.actived = type
       this.draw && this.map.removeInteraction(this.draw)
@@ -131,9 +140,13 @@ export default {
       })
       this.map.addInteraction(this.draw)
     },
+
+    // 清除绘制图层
     clearLayer () {
       this.drawSource.clear()
     },
+
+    // 清除绘制交互
     clearDraw () {
       this.actived = ''
       this.map.removeInteraction(this.draw)
